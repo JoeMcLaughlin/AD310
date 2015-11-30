@@ -78,7 +78,7 @@ public class ViewControllerBattleShip
 		        case 0: 
 		        	BSM.createPlayer1AC(userShipStartingLocation, direction);
 		        	//do while !legal
-		        		BSM.player1AC.placeBoat(userShipStartingLocation);
+		        		//BSM.player1AC.placeBoat(userShipStartingLocation);
 		        	//
 		            break;
 		        case 1: 
@@ -96,11 +96,16 @@ public class ViewControllerBattleShip
 				}//end switch case
 				
 				//BSM.createPlayer1AC(userShipStartingLocation, direction);
-				System.out.print(BSM.player1AC.direct);
+				//System.out.print(BSM.getPlayer1Placement());
 				for(int j = 0; j< BSM.player1AC.size; j++)
 				{
 				
 					System.out.println(BSM.player1AC.position[j]);
+				}
+				for(int k = 0; k< 101; k++)
+				{
+				
+					System.out.println("board Position #"+k +" : "+ BSM.player1DefensePrint[k]);
 				}
 			//}//end while loop (used to check if valid move
 		}//end for loop
@@ -127,31 +132,64 @@ public class ViewControllerBattleShip
 	}
 	
 	
-	//helper input validation method for attack above
-    public boolean areCoordinatesValid(String str)
-    {boolean isValidLetter=false;
+	public boolean areCoordinatesValid(String str)
+    {
+        
+        boolean isValidLetter=false;
         boolean isValidNumber=false;
-        if (str.charAt(0) =='A' || str.charAt(0) =='B' ||
-        str.charAt(0) =='C' || str.charAt(0) =='D' ||
-        str.charAt(0) =='E' || str.charAt(0) =='F' ||
-        str.charAt(0) =='G' || str.charAt(0) =='H' ||
-        str.charAt(0) =='I' || str.charAt(0) =='J')
-        {System.out.println(" true test coordinates are " +str.charAt(0)+str.charAt(1));
+        
+        //change users input to upper case for validation test
+        char row = str.toUpperCase().charAt(0);
+        
+        //test for letter
+        if (row =='A' || row =='B' || row =='C' || row =='D' || row =='E' || row =='F' ||
+                row =='G' || row =='H' || row =='I' || row =='J')
+        {
+            System.out.println(" true test coordinates are " +str.charAt(0)+str.charAt(1));
             isValidLetter=true;
-            System.out.println("Letter is valid");}
-
-        if ((str.length()==3 && str.charAt(1)=='1' && str.charAt(2)=='0') ||
-        (str.length()==2 && (str.charAt(1) =='1' || str.charAt(1) =='2' ||  
-                str.charAt(1) =='3' || str.charAt(1) =='4' ||
-                str.charAt(1) =='5' || str.charAt(1) =='6' ||
-                str.charAt(1) =='7' || str.charAt(1) =='8' ||
-                str.charAt(1) =='9')))
-        {isValidNumber= true;
-            System.out.println("Number is valid");}
+            System.out.println("Letter is valid");
+        }else{
+            throw new IllegalArgumentException("Column input is not a letter.");
+        }
+        
+        //test for number
+        if (str.length()==3)
+        {//user is on the 10th column
+            char c1 = str.charAt(1);
+            char c2 = str.charAt(2);
+            if (Character.isDigit(c1) && Character.isDigit(c2) )
+            {//both inputs are numbers
+                if(c1 == '1' && c2 == '0')
+                {//only 10 is a valid entry
+                    isValidNumber= true;
+                    System.out.println("Number is valid");
+                }else{
+                    throw new IllegalArgumentException("Row input too high/low.");
+                }
+            }else{
+                throw new IllegalArgumentException("Row input is not a number.");
+            }
+        }
+        //test for number
+        if (str.length()==2)
+        {//all other columns from 1-9
+            char c1 = str.charAt(1);
+            if (Character.isDigit(c1)){
+                int validateXCoordiante = str.charAt(1);
+                if(validateXCoordiante >='1' || validateXCoordiante <='9'){
+                    isValidNumber= true;
+                    System.out.println("Number is valid");
+                }else{
+                    throw new IllegalArgumentException("Row input too high/low.");
+                }
+            }else{
+                throw new IllegalArgumentException("Row input is not a number.");
+            }
+        }
 
         return isValidLetter && isValidNumber;
-
     }
+
 	
 	
 }
