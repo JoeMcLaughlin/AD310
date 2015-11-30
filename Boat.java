@@ -7,23 +7,10 @@ public abstract class Boat {
 	public int[]		position;
 	public boolean		isSunk;
 	Direction			direct;
+	//public int 			currentSpot;
 	
 	protected void placeBoat(int head){
-		this.position[0] 	= head;
-		int currentSpot 	= head;
 		
-		for(int i = 1; 1 < this.size; i++){
-			switch ( this.direct){
-			case DOWN:
-				this.position[i] = currentSpot + 10;
-			case RIGHT:
-				this.position[i] = currentSpot + 1;
-			case UPRIGHT:
-				this.position[i] = currentSpot - 9;
-			case DOWNRIGHT:
-				this.position[i] = currentSpot + 11;
-			}			
-		}
 	}
 	
 	public boolean attack(int position){
