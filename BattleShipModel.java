@@ -10,6 +10,7 @@ public class BattleShipModel
 	public Cruiser			player1C;
 	public Destroyer		player1D1;
 	public Destroyer		player1D2;
+	
 
 	/*
 	* Player 2 boats
@@ -79,6 +80,34 @@ public class BattleShipModel
         System.out.println("");
     }
 
+    /**
+     * Prints current defensive board status
+     */
+    public void printDefensiveBoard(int[] player) {
+        char letter = 'A';
+        //First ___ is the spacer for Letters in the table... *thanks for comment!
+        System.out.println("  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10|");
+        for (int i = 0; i < 10; i++) {
+        	//System.out.print("___");
+            System.out.print(" " + letter + "|");
+        	for (int k = 0; k < 10; k++) {
+                System.out.print("___|");
+            }
+            
+            for (int j = 0; j < 10; j++) {
+            	if(player[i]==2)
+            		System.out.print("|" + " H ");
+            	else if(player[i]==1)
+            		System.out.print("|" + " M ");
+            }
+            System.out.println("");
+            letter = (char)(letter+1);
+        }
+        //System.out.println("    ___|___|___|___|___|___|___|___|___|___|");  
+        System.out.println("");
+    }
+    
+    
      /**
       * Helper method to turn alpha numeric input (i.e. A 8) into a number index of the
       * main board array
@@ -126,82 +155,84 @@ public class BattleShipModel
       */
      public void createPlayer1AC(int start, Direction direction){
     	this.player1AC = new AirCraftCarrier(start, direction);
+    	
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1AC.position[i]==i){
+    		//if(player1AC.position[i]==i-1){
     			player1DefensePrint[i] = 'A';
-    		}
+    			//start++;
+    		//}
     	}
      }
      public void createPlayer2AC(int start, Direction direction){
     	this.player2AC = new AirCraftCarrier(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player2AC.position[i]==i){
+    		//if(player2AC.position[i]==i){
     			player2DefensePrint[i] = 'A';
-    		}
+    		//}
     	}
      }
      public void createPlayer1BS(int start, Direction direction){
     	this.player1BS = new BattleShip(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1BS.position[i]==i){
+    		//if(player1BS.position[i]==i){
     			player1DefensePrint[i] = 'B';
-    		}
+    		//}
     	}
      }
      public void createPlayer2BS(int start, Direction direction){
     	this.player2BS = new BattleShip(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1BS.position[i]==i){
+    		//if(player1BS.position[i]==i){
     			player1DefensePrint[i] = 'B';
-    		}
+    		//}
     	}
      }
      public void createPlayer1C(int start, Direction direction){
     	this.player1C = new Cruiser(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1C.position[i]==i){
+    		//if(player1C.position[i]==i){
     			player1DefensePrint[i] = 'C';
-    		}
+    		//}
     	}
      }
      public void createPlayer2C(int start, Direction direction){
     	this.player2C = new Cruiser(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1C.position[i]==i){
+    		//if(player1C.position[i]==i){
     			player1DefensePrint[i] = 'C';
-    		}
+    		//}
     	}
      }
      public void createPlayer1D1(int start, Direction direction){
     	this.player1D1 = new Destroyer(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1D1.position[i]==i){
+    		//if(player1D1.position[i]==i){
     			player1DefensePrint[i] = 'D';
-    		}
+    		//}
     	}
      }
      public void createPlayer1D2(int start, Direction direction){
     	this.player1D2 = new Destroyer(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player1D2.position[i]==i){
+    		//if(player1D2.position[i]==i){
     			player1DefensePrint[i] = 'D';
-    		}
+    		//}
     	}
      }
      public void createPlayer2D1(int start, Direction direction){
     	this.player2D1 = new Destroyer(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player2D1.position[i]==i){
+    		//if(player2D1.position[i]==i){
     			player1DefensePrint[i] = 'D';
-    		}
+    		//}
     	}
      }
      public void createPlayer2D2(int start, Direction direction){
     	this.player2D2 = new Destroyer(start, direction);
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(player2D2.position[i]==i){
+    		//if(player2D2.position[i]==i){
     			player1DefensePrint[i] = 'D';
-    		}
+    		//}
     	}
      }
      
@@ -273,4 +304,22 @@ public class BattleShipModel
     			this.player1Offense[position] = 1;//Miss    			 
     		}
      }
+     
+     /**
+      * Rules for the game
+      */
+     public String rules()
+     {
+         return "        Battleship Rules\n"+
+             "Players take turns guessing the coordinates of the\n"+
+             "opponent's ships until one player has a success, or hit.\n"+
+             "Once there has been a hit, the successful player goes \n"+
+             "again. Otherwise, turn-taking is resumed. \n"+
+             "Depending on the size of the ship, it will take at \n"+
+             "least two hits to sink a ship. The player that sinks \n"+
+             "all their opponents' ships wins.\n";
+     }
+
+   
+     
 }
