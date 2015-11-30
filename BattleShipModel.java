@@ -151,98 +151,193 @@ public class BattleShipModel
      }
      
      /*
-      * Create Ships
+      * Creates Player 1 AirCraft Carrier
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
       */
      public void createPlayer1AC(int start, Direction direction){
     	this.player1AC = new AirCraftCarrier(start, direction);
-    	/*for(int j = 0; j< this.player1AC.size;j++){
-    		
-    	}*/
     	this.player1AC.placeBoat(start);
     	int counter = 0;
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		if(counter < this.player1AC.size)
+    		if(counter < this.player1AC.size) 
     		{
-    			if(i == this.player1AC.position[counter]){
-    			
-    				player1DefensePrint[i] = 'A';
+    			if(i == this.player1AC.position[counter]){ 
+    				player1DefensePrint[i] = 'A'; 
     				counter++;
     			}
-    			
-    			//start++;
     		}
     	}
      }
+     /*
+      * Creates Player 2 AirCraft Carrier
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer2AC(int start, Direction direction){
     	this.player2AC = new AirCraftCarrier(start, direction);
-    	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player2AC.position[i]==i){
-    			player2DefensePrint[i] = 'A';
-    		//}
+    	this.player2AC.placeBoat(start);
+    	int counter = 0;
+    	for(int i = 0; i < player2DefensePrint.length; i++){
+    		if(counter < this.player2AC.size) 
+    		{
+    			if(i == this.player2AC.position[counter]){ 
+    				player2DefensePrint[i] = 'A'; 
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 1 BattleShip
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer1BS(int start, Direction direction){
     	this.player1BS = new BattleShip(start, direction);
+    	this.player1BS.placeBoat(start);
+    	int counter = 0;
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1BS.position[i]==i){
-    			player1DefensePrint[i] = 'B';
-    		//}
+    		if(counter < this.player1BS.size) 
+    		{
+    			if(i == this.player1BS.position[counter]){ 
+    				player1DefensePrint[i] = 'B'; 
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 2 BattleShip
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer2BS(int start, Direction direction){
     	this.player2BS = new BattleShip(start, direction);
-    	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1BS.position[i]==i){
-    			player1DefensePrint[i] = 'B';
-    		//}
+    	this.player2BS.placeBoat(start);
+    	int counter = 0;
+    	for(int i = 0; i < player2DefensePrint.length; i++){
+    		if(counter < this.player2BS.size) 
+    		{
+    			if(i == this.player2BS.position[counter]){ 
+    				player2DefensePrint[i] = 'B'; 
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 1 Carrier
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer1C(int start, Direction direction){
     	this.player1C = new Cruiser(start, direction);
+    	this.player1C.placeBoat(start);
+    	int counter = 0;
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1C.position[i]==i){
-    			player1DefensePrint[i] = 'C';
-    		//}
+    		if(counter < this.player1C.size)
+    		{
+    			if(i == this.player1C.position[counter]){ 
+    				player1DefensePrint[i] = 'C';
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 2 Carrier
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer2C(int start, Direction direction){
     	this.player2C = new Cruiser(start, direction);
-    	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1C.position[i]==i){
-    			player1DefensePrint[i] = 'C';
-    		//}
+    	this.player2C.placeBoat(start);
+    	int counter = 0;
+    	for(int i = 0; i < player2DefensePrint.length; i++){
+    		if(counter < this.player2C.size) 
+    		{
+    			if(i == this.player2C.position[counter]){
+    				player2DefensePrint[i] = 'C'; 
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 1 Destroyer 1 of 2
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer1D1(int start, Direction direction){
     	this.player1D1 = new Destroyer(start, direction);
+    	this.player1D1.placeBoat(start);
+    	int counter = 0;
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1D1.position[i]==i){
-    			player1DefensePrint[i] = 'D';
-    		//}
+    		if(counter < this.player1D1.size) 
+    		{
+    			if(i == this.player1D1.position[counter]){ 
+    				player1DefensePrint[i] = '1';
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 1 Destroyer 2 of 2
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer1D2(int start, Direction direction){
     	this.player1D2 = new Destroyer(start, direction);
+    	this.player1D2.placeBoat(start);
+    	int counter = 0;
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1D2.position[i]==i){
-    			player1DefensePrint[i] = 'D';
-    		//}
+    		if(counter < this.player1D2.size) 
+    		{
+    			if(i == this.player1D2.position[counter]){ 
+    				player1DefensePrint[i] = '2'; 
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 2 Destroyer 1 of 2
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer2D1(int start, Direction direction){
     	this.player2D1 = new Destroyer(start, direction);
-    	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player2D1.position[i]==i){
-    			player1DefensePrint[i] = 'D';
-    		//}
+    	this.player2D1.placeBoat(start);
+    	int counter = 0;
+    	for(int i = 0; i < player2DefensePrint.length; i++){
+    		if(counter < this.player2D1.size) 
+    		{
+    			if(i == this.player2D1.position[counter]){ 
+    				player2DefensePrint[i] = '1'; 
+    				counter++;
+    			}
+    		}
     	}
      }
+     /*
+      * Creates Player 2 Destroyer 2 of 2
+      * @param start		specifies the starting location of the ship
+      * @param direction	specifies the direction to place the ship
+      */
      public void createPlayer2D2(int start, Direction direction){
     	this.player2D2 = new Destroyer(start, direction);
-    	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player2D2.position[i]==i){
-    			player1DefensePrint[i] = 'D';
-    		//}
+    	this.player2D2.placeBoat(start);
+    	int counter = 0;
+    	for(int i = 0; i < player2DefensePrint.length; i++){
+    		if(counter < this.player2D2.size) 
+    		{
+    			if(i == this.player2D2.position[counter]){ 
+    				player2DefensePrint[i] = '2'; 
+    				counter++;
+    			}
+    		}
     	}
      }
      
