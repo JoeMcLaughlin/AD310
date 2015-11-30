@@ -37,9 +37,11 @@ public class ViewControllerBattleShip
 	* Perform placement validation
 	*/
 	public void setUp(){
-		for(int i=0;i<5;i++){//user loops through 5 times to place all ships.
+		
+		
+		for(int i=0;i<=5;i++){//user loops through 5 times to place all ships.
 			
-			//while(true){//add isValid()
+			//while(true){//add isValid() && noShips()
 				System.out.println("You will place your ships in this order,\nAircraft Carrier(length of 5), \n"
 						+ "BattleCruiser(length of 4),\nCarrier(length of 3),\nTwo Destroyers(each a length of 2)");
 				//first parameter for placement
@@ -51,42 +53,55 @@ public class ViewControllerBattleShip
 				int userX = userIn.nextInt();
 				
 				//third parameter for placement
-				System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
-				int userDirection = userIn.nextInt();
+				
 				
 				//places the head of the ship at set co-ordinates specified by the user
 				int userShipStartingLocation = BSM.toArrayIndex(userY, userX);
 				
-				
+				System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
+				int userDirection = userIn.nextInt();
 				//Take some direction
-				Direction direction = Direction.RIGHT;
+				Direction direction = null;
 				switch (userDirection) {
-		        case '1': direction = Direction.DOWN;
+		        case 1: direction = Direction.DOWN;
 		           break;
-		        case '2': direction = Direction.RIGHT;
+		        case 2: direction = Direction.RIGHT;
 		        	break;
-		        case '3': direction = Direction.UPRIGHT;
+		        case 3: direction = Direction.UPRIGHT;
 		        	break;
-		        case '4': direction = Direction.DOWNRIGHT;
+		        case 4: direction = Direction.DOWNRIGHT;
 		        	break;
 				}//end switch case
 				
 				
 				switch (i) {//places ship at the set location
-		        case '0': BSM.createPlayer1AC(userShipStartingLocation, direction);
-		        	
-		           break;
-		        case '1': BSM.createPlayer1BS(userShipStartingLocation, direction);
+		        case 0: 
+		        	BSM.createPlayer1AC(userShipStartingLocation, direction);
+		        	//do while !legal
+		        		BSM.player1AC.placeBoat(userShipStartingLocation);
+		        	//
+		            break;
+		        case 1: 
+		        	BSM.createPlayer1BS(userShipStartingLocation, direction);
 		        	break;
-		        case '2': BSM.createPlayer1C(userShipStartingLocation, direction);
+		        case 2: 
+		        	BSM.createPlayer1C(userShipStartingLocation, direction);
 		        	break;
-		        case '3': BSM.createPlayer1D1(userShipStartingLocation, direction);
+		        case 3: 
+		        	BSM.createPlayer1D1(userShipStartingLocation, direction);
 		        	break;
-		        case '4': BSM.createPlayer1D2(userShipStartingLocation, direction);
+		        case 4: 
+		        	BSM.createPlayer1D2(userShipStartingLocation, direction);
 	        	break;
 				}//end switch case
 				
-				displayPlayer1Placement();
+				//BSM.createPlayer1AC(userShipStartingLocation, direction);
+				System.out.print(BSM.player1AC.direct);
+				for(int j = 0; j< BSM.player1AC.size; j++)
+				{
+				
+					System.out.println(BSM.player1AC.position[j]);
+				}
 			//}//end while loop (used to check if valid move
 		}//end for loop
 		
@@ -104,4 +119,39 @@ public class ViewControllerBattleShip
 		
 	}
 
+	/*
+	* Displays the rules of the game.
+	*/
+	public void printRules(){
+		System.out.print(BSM.rules());
+	}
+	
+	
+	//helper input validation method for attack above
+    public boolean areCoordinatesValid(String str)
+    {boolean isValidLetter=false;
+        boolean isValidNumber=false;
+        if (str.charAt(0) =='A' || str.charAt(0) =='B' ||
+        str.charAt(0) =='C' || str.charAt(0) =='D' ||
+        str.charAt(0) =='E' || str.charAt(0) =='F' ||
+        str.charAt(0) =='G' || str.charAt(0) =='H' ||
+        str.charAt(0) =='I' || str.charAt(0) =='J')
+        {System.out.println(" true test coordinates are " +str.charAt(0)+str.charAt(1));
+            isValidLetter=true;
+            System.out.println("Letter is valid");}
+
+        if ((str.length()==3 && str.charAt(1)=='1' && str.charAt(2)=='0') ||
+        (str.length()==2 && (str.charAt(1) =='1' || str.charAt(1) =='2' ||  
+                str.charAt(1) =='3' || str.charAt(1) =='4' ||
+                str.charAt(1) =='5' || str.charAt(1) =='6' ||
+                str.charAt(1) =='7' || str.charAt(1) =='8' ||
+                str.charAt(1) =='9')))
+        {isValidNumber= true;
+            System.out.println("Number is valid");}
+
+        return isValidLetter && isValidNumber;
+
+    }
+	
+	
 }
