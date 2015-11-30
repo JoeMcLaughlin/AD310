@@ -40,12 +40,12 @@ public class BattleShipModel
 	public char[]		player2DefensePrint;
 	
 	public BattleShipModel(){
-		this.player1DefensePrint 	= new char[100];
-		this.player1Offense 		= new int[100];
+		this.player1DefensePrint 	= new char[101];
+		this.player1Offense 		= new int[101];
 		
-		this.player2DefensePrint 	= new char[100];
-		this.player2Offense 		= new int[100];
-		for(int i = 0; i < 100; i++){
+		this.player2DefensePrint 	= new char[101];
+		this.player2Offense 		= new int[101];
+		for(int i = 0; i < 101; i++){
 			this.player1Offense[i] = 0;
 			this.player2Offense[i] = 0;
 			this.player1DefensePrint[i] = ' ';
@@ -155,12 +155,22 @@ public class BattleShipModel
       */
      public void createPlayer1AC(int start, Direction direction){
     	this.player1AC = new AirCraftCarrier(start, direction);
-    	
+    	/*for(int j = 0; j< this.player1AC.size;j++){
+    		
+    	}*/
+    	this.player1AC.placeBoat(start);
+    	int counter = 0;
     	for(int i = 0; i < player1DefensePrint.length; i++){
-    		//if(player1AC.position[i]==i-1){
-    			player1DefensePrint[i] = 'A';
+    		if(counter < this.player1AC.size)
+    		{
+    			if(i == this.player1AC.position[counter]){
+    			
+    				player1DefensePrint[i] = 'A';
+    				counter++;
+    			}
+    			
     			//start++;
-    		//}
+    		}
     	}
      }
      public void createPlayer2AC(int start, Direction direction){
