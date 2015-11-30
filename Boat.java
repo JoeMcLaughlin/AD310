@@ -7,6 +7,7 @@ public abstract class Boat {
 	public int[]		position;
 	public boolean		isSunk;
 	Direction			direct;
+	public char[]		shipCoordinates;
 	//public int 			currentSpot;
 	
 	protected void placeBoat(int head){

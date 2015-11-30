@@ -23,7 +23,13 @@ public class AirCraftCarrier extends Boat {
         this.isSunk = false;
         this.direct = direction;
         //this.currentSpot = head;
+        this.shipCoordinates = new char[size];
         
+        
+    }
+    
+    protected void shipsCoordinates(){
+    	
     }
     
     protected void placeBoat(int head){
