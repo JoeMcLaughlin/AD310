@@ -38,12 +38,15 @@ public class ViewControllerBattleShip
 	*/
 	public void setUp(){
 		
-		
-		for(int i=0;i<=5;i++){//user loops through 5 times to place all ships.
+		//player one
+		for(int i=0;i<5;i++){//user loops through 5 times to place all ships.
 			
 			//while(true){//add isValid() && noShips()
-				System.out.println("You will place your ships in this order,\nAircraft Carrier(length of 5), \n"
-						+ "BattleCruiser(length of 4),\nCarrier(length of 3),\nTwo Destroyers(each a length of 2)");
+				System.out.println("You will place your ships in this order,\n#1-Aircraft Carrier(length of 5), \n"
+						+ "#2-BattleCruiser(length of 4),\n#3-Carrier(length of 3),\n#4 Destroyer#1(length of 2)"
+						+ "\n#5 Destroyer#2(length of 2)");
+				
+				System.out.println("\n\nPlease place ship #" + (i+1));
 				//first parameter for placement
 				System.out.println("Please enter your Y co-ordinate(vertical)");
 				char userY = userIn.next().charAt(0);
@@ -99,7 +102,6 @@ public class ViewControllerBattleShip
 				//System.out.print(BSM.getPlayer1Placement());
 				for(int j = 0; j< BSM.player1AC.size; j++)
 				{
-				
 					System.out.println(BSM.player1AC.position[j]);
 				}
 				for(int k = 0; k< 101; k++)
@@ -109,6 +111,87 @@ public class ViewControllerBattleShip
 				}
 			//}//end while loop (used to check if valid move
 		}//end for loop
+		
+		
+		
+		/**************************************|||||*******************************/
+		
+		//player two
+				for(int i=0;i<5;i++){//user loops through 5 times to place all ships.
+					
+					//while(true){//add isValid() && noShips()
+					System.out.println("Player 2's turn.....");
+					System.out.println("You will place your ships in this order,\n#1-Aircraft Carrier(length of 5), \n"
+							+ "#2-BattleCruiser(length of 4),\n#3-Carrier(length of 3),\n#4 Destroyer#1(length of 2)"
+							+ "\n#5 Destroyer#2(length of 2)");
+					System.out.println("\n\nPlease place ship #" + (i+1));
+					//first parameter for placement
+					System.out.println("Please enter your Y co-ordinate(vertical)");
+					char userY = userIn.next().charAt(0);
+					
+					//second parameter for placement
+					System.out.println("Please enter your X co-ordinate(horizontal 1-10)");
+					int userX = userIn.nextInt();
+					
+					//third parameter for placement
+					
+					
+					//places the head of the ship at set co-ordinates specified by the user
+					int userShipStartingLocation = BSM.toArrayIndex(userY, userX);
+					
+					System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
+					int userDirection = userIn.nextInt();
+					//Take some direction
+					Direction direction = null;
+					switch (userDirection) {
+			        case 1: direction = Direction.DOWN;
+			           break;
+			        case 2: direction = Direction.RIGHT;
+			        	break;
+			        case 3: direction = Direction.UPRIGHT;
+			        	break;
+			        case 4: direction = Direction.DOWNRIGHT;
+			        	break;
+					}//end switch case
+					
+					
+					switch (i) {//places ship at the set location
+			        case 0: 
+			        	BSM.createPlayer2AC(userShipStartingLocation, direction);
+			        	//do while !legal
+			        		//BSM.player1AC.placeBoat(userShipStartingLocation);
+			        	//
+			            break;
+			        case 1: 
+			        	BSM.createPlayer2BS(userShipStartingLocation, direction);
+			        	break;
+			        case 2: 
+			        	BSM.createPlayer2C(userShipStartingLocation, direction);
+			        	break;
+			        case 3: 
+			        	BSM.createPlayer2D1(userShipStartingLocation, direction);
+			        	break;
+			        case 4: 
+			        	BSM.createPlayer2D2(userShipStartingLocation, direction);
+		        	break;
+					}//end switch case
+					
+					//BSM.createPlayer1AC(userShipStartingLocation, direction);
+					//System.out.print(BSM.getPlayer1Placement());
+					for(int j = 0; j< BSM.player2AC.size; j++)
+					{
+						System.out.println(BSM.player2AC.position[j]);
+					}
+					for(int k = 0; k< 101; k++)
+					{
+					
+						System.out.println("board Position #"+k +" : "+ BSM.player2DefensePrint[k]);
+					}
+					//}//end while loop (used to check if valid move
+				}//end for loop
+		
+		
+		/**************************************|||||*******************************/
 		
 		//Example of creating AircraftCarrier for player 1 after taking input and validating
 		//BSM.createPlayer1AC(inputExample, down);
