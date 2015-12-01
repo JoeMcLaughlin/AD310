@@ -41,4 +41,18 @@ public abstract class Boat {
 		return isSunk;
 	}
 	
+	public String toString(){
+		String msg = "";
+		
+		/*
+		public int 			size;
+		public boolean[]	boatState;
+		public int[]		position;
+		public boolean		isSunk;
+		Direction			direct;
+		public char[]		shipCoordinates;
+		*/
+		
+		return msg;
+	}
 }
