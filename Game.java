@@ -9,6 +9,7 @@ public class Game {
 		theViewController.printRules();
 		theViewController.displayPlayer1Placement();
 		theViewController.setUp();
+		theViewController.shot();
 		
 	}
 }
