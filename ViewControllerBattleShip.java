@@ -39,26 +39,30 @@ public class ViewControllerBattleShip
 	public void setUp(){
 		
 		//player one
+		boolean validPlacement = true;
 		for(int i=0;i<5;i++){//user loops through 5 times to place all ships.
-			
-			//while(true){//add isValid() && noShips()
-				System.out.println("You will place your ships in this order,\n#1-Aircraft Carrier(length of 5), \n"
-						+ "#2-BattleCruiser(length of 4),\n#3-Carrier(length of 3),\n#4 Destroyer#1(length of 2)"
-						+ "\n#5 Destroyer#2(length of 2)");
-				
+			//int i = 0;
+			do{//add isValid() && noShips()
+				if(validPlacement == true){
+					System.out.println("You will place your ships in this order,\n#1-Aircraft Carrier(length of 5), \n"
+							+ "#2-BattleCruiser(length of 4),\n#3-Carrier(length of 3),\n#4 Destroyer#1(length of 2)"
+							+ "\n#5 Destroyer#2(length of 2)");
+				}else if(validPlacement == false){
+					System.out.println("Invalid location, try again");
+				}
 				System.out.println("\n\nPlease place ship #" + (i+1));
 				//first parameter for placement
-				System.out.println("Please enter your Y co-ordinate(vertical)");
+				System.out.println("Please enter your Y coordinate(vertical)");
 				char userY = userIn.next().charAt(0);
 				
 				//second parameter for placement
-				System.out.println("Please enter your X co-ordinate(horizontal 1-10)");
+				System.out.println("Please enter your X coordinate(horizontal 1-10)");
 				int userX = userIn.nextInt();
 				
 				//third parameter for placement
 				
 				
-				//places the head of the ship at set co-ordinates specified by the user
+				//places the head of the ship at set coordinates specified by the user
 				int userShipStartingLocation = BSM.toArrayIndex(userY, userX);
 				
 				System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
@@ -76,27 +80,33 @@ public class ViewControllerBattleShip
 		        	break;
 				}//end switch case
 				
-				
-				switch (i) {//places ship at the set location
-		        case 0: 
-		        	BSM.createPlayer1AC(userShipStartingLocation, direction);
-		        	//do while !legal
-		        		//BSM.player1AC.placeBoat(userShipStartingLocation);
-		        	//
-		            break;
-		        case 1: 
-		        	BSM.createPlayer1BS(userShipStartingLocation, direction);
+				if(spotOpen(userY, userX,1)){
+					validPlacement = true;
+					switch (i) {//places ship at the set location
+			        case 0: 
+			        	BSM.createPlayer1AC(userShipStartingLocation, direction);
+			        	//do while !legal
+			        		//BSM.player1AC.placeBoat(userShipStartingLocation);
+			        	//
+			            break;
+			        case 1: 
+			        	BSM.createPlayer1BS(userShipStartingLocation, direction);
+			        	break;
+			        case 2: 
+			        	BSM.createPlayer1C(userShipStartingLocation, direction);
+			        	break;
+			        case 3: 
+			        	BSM.createPlayer1D1(userShipStartingLocation, direction);
+			        	break;
+			        case 4: 
+			        	BSM.createPlayer1D2(userShipStartingLocation, direction);
 		        	break;
-		        case 2: 
-		        	BSM.createPlayer1C(userShipStartingLocation, direction);
-		        	break;
-		        case 3: 
-		        	BSM.createPlayer1D1(userShipStartingLocation, direction);
-		        	break;
-		        case 4: 
-		        	BSM.createPlayer1D2(userShipStartingLocation, direction);
-	        	break;
-				}//end switch case
+		        	
+					}//end switch case
+				}else{
+					validPlacement = false;
+				}//end if spotOpen
+			
 				
 				//BSM.createPlayer1AC(userShipStartingLocation, direction);
 				//System.out.print(BSM.getPlayer1Placement());
@@ -109,7 +119,7 @@ public class ViewControllerBattleShip
 				
 					System.out.println("board Position #"+k +" : "+ BSM.player1DefensePrint[k]);
 				}
-			//}//end while loop (used to check if valid move
+			}while(validPlacement == false);//end while loop (used to check if valid move
 		}//end for loop
 		
 		
@@ -118,7 +128,7 @@ public class ViewControllerBattleShip
 		
 		//player two
 				for(int i=0;i<5;i++){//user loops through 5 times to place all ships.
-					
+			
 					//while(true){//add isValid() && noShips()
 					System.out.println("Player 2's turn.....");
 					System.out.println("You will place your ships in this order,\n#1-Aircraft Carrier(length of 5), \n"
@@ -126,17 +136,17 @@ public class ViewControllerBattleShip
 							+ "\n#5 Destroyer#2(length of 2)");
 					System.out.println("\n\nPlease place ship #" + (i+1));
 					//first parameter for placement
-					System.out.println("Please enter your Y co-ordinate(vertical)");
+					System.out.println("Please enter your Y coordinate(vertical)");
 					char userY = userIn.next().charAt(0);
 					
 					//second parameter for placement
-					System.out.println("Please enter your X co-ordinate(horizontal 1-10)");
+					System.out.println("Please enter your X coordinate(horizontal 1-10)");
 					int userX = userIn.nextInt();
 					
 					//third parameter for placement
 					
 					
-					//places the head of the ship at set co-ordinates specified by the user
+					//places the head of the ship at set coordinates specified by the user
 					int userShipStartingLocation = BSM.toArrayIndex(userY, userX);
 					
 					System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
@@ -158,9 +168,7 @@ public class ViewControllerBattleShip
 					switch (i) {//places ship at the set location
 			        case 0: 
 			        	BSM.createPlayer2AC(userShipStartingLocation, direction);
-			        	//do while !legal
-			        		//BSM.player1AC.placeBoat(userShipStartingLocation);
-			        	//
+			      
 			            break;
 			        case 1: 
 			        	BSM.createPlayer2BS(userShipStartingLocation, direction);
@@ -196,6 +204,13 @@ public class ViewControllerBattleShip
 		//Example of creating AircraftCarrier for player 1 after taking input and validating
 		//BSM.createPlayer1AC(inputExample, down);
 	}//end setUp()
+	
+	
+	/*
+	 * 
+	 */
+	
+	
 	
 	/*
 	* Player ship placement validation some helper method to check boundaries,
@@ -274,5 +289,161 @@ public class ViewControllerBattleShip
     }
 
 	
+	public boolean isHit(char row,int column, int player){
+		
+		if(player == 1){
+			int userLocation = BSM.toArrayIndex(row,column);
+			String shot = Character.toString(BSM.player2DefensePrint[userLocation]);
+			if(shot.equals("A") || shot.equals("B") || shot.equals("C") || shot.equals("D")){
+				//hit
+				return true;
+			}else{
+				return false;
+				//miss
+			}
+		}else if(player == 2){
+			//char spot = BSM.player1DefensePrint[0];
+			int userLocation = BSM.toArrayIndex(row,column);
+			String shot = Character.toString(BSM.player1DefensePrint[userLocation]);
+			if(shot != " "){
+				//hit
+				return true;
+			}else{
+				return false;
+				//miss
+			}
+		}else{
+			//shouldn't be in here...
+			throw new IllegalArgumentException("Not a valid player number!");
+		}
+		
+		//
+		
+		//return false;
+	}
 	
+	public boolean onBoard(char row,int column){
+		
+		String rowColumn = Character.toString(row) + Integer.toString(column);
+		
+		if(areCoordinatesValid(rowColumn))
+		{
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean notCalled(char row,int column,int player)
+	{
+		int userLocation = BSM.toArrayIndex(row,column);
+		if(player == 1){
+			
+			String shot = Character.toString(BSM.player1Offense[userLocation]);
+			if(shot.equals("X") || shot.equals("O")){
+				return false;
+			}else{
+				return true;
+			}
+			
+		}else if(player ==2){
+			String shot = Character.toString(BSM.player2Offense[userLocation]);
+			if(shot.equals('X') || shot.equals('O')){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			//shouldn't be in here...
+			throw new IllegalArgumentException("Not a valid player number!");
+		}
+	}
+	
+	public void shot(){
+		boolean keepAttacking = false;
+			do{
+			int player = 1;
+			//player one
+			//while(hit){
+			System.out.println("Please enter your Y coordinate(vertical)");
+			char userY = userIn.next().charAt(0);
+			
+			//second parameter for placement
+			System.out.println("Please enter your X coordinate(horizontal 1-10)");
+			int userX = userIn.nextInt();
+			
+			//third parameter for placement
+			
+			
+			//places the head of the ship at set coordinates specified by the user
+			
+			int userShot = BSM.toArrayIndex(userY, userX);
+			System.out.println("shot:"+userShot);
+			System.out.println(" notCalled:"+notCalled(userY,userX,player));
+			System.out.println("onBoard"+onBoard(userY,userX));
+			System.out.println(" isHit:"+ isHit(userY,userX,player));
+			System.out.println("CurrentPlayer:" + player);
+			if(notCalled(userY,userX,player) && onBoard(userY,userX)){
+				
+				if(isHit(userY,userX,player)){
+					//hit
+					
+					if(player == 2){
+						BSM.player2Offense[userShot] = 'X';
+						System.out.println("Hit for P2");
+						
+					}else if(player ==1){
+						BSM.player1Offense[userShot] = 'X';
+						System.out.println("HitP1");
+						System.out.println("DefBoard::"+BSM.player1DefensePrint[userShot]);
+						System.out.println("OfBoard::"+BSM.player1Offense[userShot]);
+					}
+					keepAttacking = true;
+				}else{
+					//miss
+					if(player == 2){
+						BSM.player2Offense[userShot] = 'O';
+						System.out.println("Miss");
+						player = 1;
+					}else if(player ==1){
+						BSM.player1Offense[userShot] = 'O';
+						System.out.println("Miss");
+						player = 2;
+					}
+				}
+			}
+		
+		
+	}while(keepAttacking);//end while
+		
+	}
+	
+	public boolean spotOpen(char row,int column,int player){
+		
+		if(player == 1){
+			int userLocation = BSM.toArrayIndex(row,column);
+			String unitPlace = Character.toString(BSM.player1DefensePrint[userLocation]);
+			if(unitPlace.equals("A") || unitPlace.equals("B") || unitPlace.equals("C") || unitPlace.equals("D")){
+				//taken
+				return false;
+			}else{
+				return true;
+				//open
+			}
+		}else if(player == 2){
+			int userLocation = BSM.toArrayIndex(row,column);
+			String unitPlace = Character.toString(BSM.player2DefensePrint[userLocation]);
+			if(unitPlace.equals("A") || unitPlace.equals("B") || unitPlace.equals("C") || unitPlace.equals("D")){
+				//taken
+				return false;
+			}else{
+				return true;
+				//open
+			}
+		}
+		
+		
+		return false;
+		
+	}
 }
