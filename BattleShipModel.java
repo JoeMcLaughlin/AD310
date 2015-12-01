@@ -24,7 +24,7 @@ public class BattleShipModel
 	/*
 	* Player 1 Boards
 	*/
-	public int[] 	player1Offense;// 0 no play, 1 miss, 2 hit
+	public char[] 	player1Offense;// 0 no play, 1 miss, 2 hit
 	/*
 	* This will be empty except the actual ships will have a character
 	*/
@@ -33,7 +33,7 @@ public class BattleShipModel
 	/*
 	* Player 2 Boards
 	*/
-	public int[] 	player2Offense;// 0 no play, 1 miss, 2 hit
+	public char[] 	player2Offense;// 0 no play, 1 miss, 2 hit
 	/*
 	* This will be empty except the actual ships will have a character
 	*/
@@ -41,13 +41,13 @@ public class BattleShipModel
 	
 	public BattleShipModel(){
 		this.player1DefensePrint 	= new char[101];
-		this.player1Offense 		= new int[101];
+		this.player1Offense 		= new char[101];
 		
 		this.player2DefensePrint 	= new char[101];
-		this.player2Offense 		= new int[101];
+		this.player2Offense 		= new char[101];
 		for(int i = 0; i < 101; i++){
-			this.player1Offense[i] = 0;
-			this.player2Offense[i] = 0;
+			this.player1Offense[i] = ' ';
+			this.player2Offense[i] = ' ';
 			this.player1DefensePrint[i] = ' ';
 			this.player2DefensePrint[i] = ' ';
 		}
@@ -56,7 +56,7 @@ public class BattleShipModel
     /**
      * Prints current board status
      */
-    public void printOffenseBoard(int[] player) {
+    public void printOffenseBoard(char[] player) {
         char letter = 'A';
         //First ___ is the spacer for Letters in the table... *thanks for comment!
         System.out.println("  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10|");
@@ -342,10 +342,10 @@ public class BattleShipModel
      }
      
      //If you need to see if it was played or not
-     public int[] getPlayer1Board(){
+     public char[] getPlayer1Board(){
     	return this.player1Offense;
      }
-     public int[] getPlayer2Board(){
+     public char[] getPlayer2Board(){
     	return this.player2Offense;
      }
      
