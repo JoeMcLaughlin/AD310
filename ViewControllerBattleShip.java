@@ -17,7 +17,7 @@ public class ViewControllerBattleShip
 	//Print out player 1 placement                                                                                                                                                                        
 	public void displayPlayer1Placement(){
 		//Use this model object and use the print method, pass it the model's player 1 offense board.
-		this.BSM.printOffenseBoard(BSM.player1Offense);
+		this.BSM.printDefensiveBoard(BSM.player1DefensePrint);
 	}
 	
 	//Print out player 2 placement
@@ -39,9 +39,9 @@ public class ViewControllerBattleShip
 	public void setUp(){
 		
 		//player one
-		boolean validPlacement = true;
+		boolean validPlacement = true;//used to keep the user entering ships as long as valid
 		for(int i=0;i<5;i++){//user loops through 5 times to place all ships.
-			//int i = 0;
+			int player = 1;
 			do{//add isValid() && noShips()
 				if(validPlacement == true){
 					System.out.println("You will place your ships in this order,\n#1-Aircraft Carrier(length of 5), \n"
@@ -50,37 +50,57 @@ public class ViewControllerBattleShip
 				}else if(validPlacement == false){
 					System.out.println("Invalid location, try again");
 				}
-				System.out.println("\n\nPlease place ship #" + (i+1));
-				//first parameter for placement
+				displayPlayer1Placement();
+				System.out.println("Player #"+ player +"\n\nPlease place ship #" + (i+1));
+				
+				//first parameter for placement = row
 				System.out.println("Please enter your Y coordinate(vertical)");
 				char userY = userIn.next().charAt(0);
-				
-				//second parameter for placement
+				//second parameter for placement = column
 				System.out.println("Please enter your X coordinate(horizontal 1-10)");
 				int userX = userIn.nextInt();
+				//third parameter for placement = direction
 				
-				//third parameter for placement
-				
+				System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
+				int userDirection = userIn.nextInt();
 				
 				//places the head of the ship at set coordinates specified by the user
 				int userShipStartingLocation = BSM.toArrayIndex(userY, userX);
 				
-				System.out.println("Please enter the direction you wish to place the ship(1-Down,2-Right,3-Up Right,4-Down Right");
-				int userDirection = userIn.nextInt();
-				//Take some direction
 				Direction direction = null;
-				switch (userDirection) {
-		        case 1: direction = Direction.DOWN;
-		           break;
-		        case 2: direction = Direction.RIGHT;
-		        	break;
-		        case 3: direction = Direction.UPRIGHT;
-		        	break;
-		        case 4: direction = Direction.DOWNRIGHT;
-		        	break;
+				switch (userDirection) 
+				{//cast's direction based on users input
+			        case 1: direction = Direction.DOWN;
+			           break;
+			        case 2: direction = Direction.RIGHT;
+			        	break;
+			        case 3: direction = Direction.UPRIGHT;
+			        	break;
+			        case 4: direction = Direction.DOWNRIGHT;
+			        	break;
 				}//end switch case
 				
-				if(spotOpen(userY, userX,1)){
+				int size = 0; 
+				switch(i)
+				{//sets size of ship for incrementing spots open
+					case 0:
+						size = 5;
+						break;
+					case 1:
+						size = 4;
+						break;
+					case 2:
+						size = 3;
+						break;
+					case 3:
+						size = 2;
+						break;
+					case 4:
+						size = 2;
+						break;
+				}//end switch
+				
+				if(spotOpen(userY, userX,1,size,userDirection)){
 					validPlacement = true;
 					switch (i) {//places ship at the set location
 			        case 0: 
@@ -107,18 +127,18 @@ public class ViewControllerBattleShip
 					validPlacement = false;
 				}//end if spotOpen
 			
-				
+				System.out.println(BSM.player1DefensePrint[userShipStartingLocation]);
 				//BSM.createPlayer1AC(userShipStartingLocation, direction);
 				//System.out.print(BSM.getPlayer1Placement());
-				for(int j = 0; j< BSM.player1AC.size; j++)
+				/*for(int j = 0; j< BSM.player1AC.size; j++)
 				{
-					System.out.println(BSM.player1AC.position[j]);
+					
 				}
 				for(int k = 0; k< 101; k++)
 				{
 				
 					System.out.println("board Position #"+k +" : "+ BSM.player1DefensePrint[k]);
-				}
+				}*/
 			}while(validPlacement == false);//end while loop (used to check if valid move
 		}//end for loop
 		
@@ -154,14 +174,14 @@ public class ViewControllerBattleShip
 					//Take some direction
 					Direction direction = null;
 					switch (userDirection) {
-			        case 1: direction = Direction.DOWN;
-			           break;
-			        case 2: direction = Direction.RIGHT;
-			        	break;
-			        case 3: direction = Direction.UPRIGHT;
-			        	break;
-			        case 4: direction = Direction.DOWNRIGHT;
-			        	break;
+				        case 1: direction = Direction.DOWN;
+				           break;
+				        case 2: direction = Direction.RIGHT;
+				        	break;
+				        case 3: direction = Direction.UPRIGHT;
+				        	break;
+				        case 4: direction = Direction.DOWNRIGHT;
+				        	break;
 					}//end switch case
 					
 					
@@ -284,9 +304,8 @@ public class ViewControllerBattleShip
                 throw new IllegalArgumentException("Row input is not a number.");
             }
         }
-
         return isValidLetter && isValidNumber;
-    }
+    }//end method areCoordinatesValid
 
 	
 	public boolean isHit(char row,int column, int player){
@@ -294,7 +313,7 @@ public class ViewControllerBattleShip
 		if(player == 1){
 			int userLocation = BSM.toArrayIndex(row,column);
 			String shot = Character.toString(BSM.player2DefensePrint[userLocation]);
-			if(shot.equals("A") || shot.equals("B") || shot.equals("C") || shot.equals("D")){
+			if(shot.equals("A") || shot.equals("B") || shot.equals("C") || shot.equals("1")|| shot.equals("2")){
 				//hit
 				return true;
 			}else{
@@ -305,7 +324,7 @@ public class ViewControllerBattleShip
 			//char spot = BSM.player1DefensePrint[0];
 			int userLocation = BSM.toArrayIndex(row,column);
 			String shot = Character.toString(BSM.player1DefensePrint[userLocation]);
-			if(shot != " "){
+			if(shot.equals("A") || shot.equals("B") || shot.equals("C") || shot.equals("1")|| shot.equals("2")){
 				//hit
 				return true;
 			}else{
@@ -320,7 +339,7 @@ public class ViewControllerBattleShip
 		//
 		
 		//return false;
-	}
+	}//end method isHit
 	
 	public boolean onBoard(char row,int column){
 		
@@ -332,7 +351,7 @@ public class ViewControllerBattleShip
 		}else{
 			return false;
 		}
-	}
+	}//end method onBoard
 	
 	public boolean notCalled(char row,int column,int player)
 	{
@@ -357,12 +376,13 @@ public class ViewControllerBattleShip
 			//shouldn't be in here...
 			throw new IllegalArgumentException("Not a valid player number!");
 		}
-	}
+	}//end method notCalled
 	
 	public void shot(){
 		boolean keepAttacking = false;
-			do{
-			int player = 1;
+		int player = 1;
+		do{
+			
 			//player one
 			//while(hit){
 			System.out.println("Please enter your Y coordinate(vertical)");
@@ -404,46 +424,101 @@ public class ViewControllerBattleShip
 					if(player == 2){
 						BSM.player2Offense[userShot] = 'O';
 						System.out.println("Miss");
+						
 						player = 1;
+						System.out.println("CurrentPlayer:" + player);
 					}else if(player ==1){
 						BSM.player1Offense[userShot] = 'O';
 						System.out.println("Miss");
 						player = 2;
+						System.out.println("CurrentPlayer:" + player);
 					}
-				}
-			}
-		
-		
-	}while(keepAttacking);//end while
-		
-	}
+					keepAttacking = true;
+				}//end if(isHit(userY,userX,player)){
+			}//end if(notCalled(userY,userX,player) && onBoard(userY,userX))
+		}while(keepAttacking);//end while
+	}//end method shot
 	
-	public boolean spotOpen(char row,int column,int player){
+	/*
+	 * 
+	 */
+	public boolean spotOpen(char row,int column,int player,int shipLength,int direct){
 		
 		if(player == 1){
 			int userLocation = BSM.toArrayIndex(row,column);
 			String unitPlace = Character.toString(BSM.player1DefensePrint[userLocation]);
-			if(unitPlace.equals("A") || unitPlace.equals("B") || unitPlace.equals("C") || unitPlace.equals("D")){
-				//taken
-				return false;
-			}else{
-				return true;
-				//open
+			//NEED LOGIC FOR THE LENGTH OF THE SHIP
+			int nextSpot = userLocation;
+			for(int i = 0; i<shipLength; i++){
+				
+				
+				if(unitPlace.equals("A") || unitPlace.equals("B") || unitPlace.equals("C") || unitPlace.equals("1")|| unitPlace.equals("2")){
+					//taken
+					return false;
+				}else{
+					if(direct == 1) {
+			        	nextSpot = nextSpot + (10*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}else if(direct == 2) {//right
+			        	nextSpot = nextSpot + (1*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}else if(direct == 3) {//upright
+			        	nextSpot = nextSpot - (9*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}else if(direct == 4) {//downright
+			        	nextSpot = nextSpot + (11*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}
+				}
+				
 			}
+			
+			
 		}else if(player == 2){
 			int userLocation = BSM.toArrayIndex(row,column);
 			String unitPlace = Character.toString(BSM.player2DefensePrint[userLocation]);
-			if(unitPlace.equals("A") || unitPlace.equals("B") || unitPlace.equals("C") || unitPlace.equals("D")){
-				//taken
-				return false;
-			}else{
-				return true;
-				//open
+			int nextSpot = userLocation;
+			for(int i = 0; i<shipLength; i++){
+				
+				
+				if(unitPlace.equals("A") || unitPlace.equals("B") || unitPlace.equals("C") || unitPlace.equals("1")|| unitPlace.equals("2")){
+					//taken
+					return false;
+				}else{
+					if(direct == 1) {
+			        	nextSpot = nextSpot + (10*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}else if(direct == 2) {//right
+			        	nextSpot = nextSpot + (1*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}else if(direct == 3) {//upright
+			        	nextSpot = nextSpot - (9*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}else if(direct == 4) {//downright
+			        	nextSpot = nextSpot + (11*(i+1));
+			        	unitPlace = Integer.toString(nextSpot);
+			        	return true;
+					}
+				}
+				
 			}
-		}
+			
+		}return true;
+			
+	}//end method spotOpen
+	
+	public String testers(){
+		
+		String msg = "";
 		
 		
-		return false;
-		
+		return msg;
 	}
-}
+}//end class ViewControllerBattleShip
