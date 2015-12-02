@@ -83,29 +83,39 @@ public class BattleShipModel
     /**
      * Prints current defensive board status
      */
-    public void printDefensiveBoard(int[] player) {
+  
+    
+    
+    /**
+     * Prints current board status
+     */
+    public void printDefensiveBoard(char[] board) {
         char letter = 'A';
-        //First ___ is the spacer for Letters in the table... *thanks for comment!
-        System.out.println("  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10|");
+        System.out.println("   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 ");
         for (int i = 0; i < 10; i++) {
-        	//System.out.print("___");
-            System.out.print(" " + letter + "|");
-        	for (int k = 0; k < 10; k++) {
+            for (int k = 0; k < 10; k++) {
                 System.out.print("___|");
             }
-            
+            System.out.println("____");
+            System.out.print(" " + letter + " ");
             for (int j = 0; j < 10; j++) {
-            	if(player[i]==2)
-            		System.out.print("|" + " H ");
-            	else if(player[i]==1)
-            		System.out.print("|" + " M ");
+                System.out.print("| " + board[10*i+j] + " ");
             }
             System.out.println("");
             letter = (char)(letter+1);
         }
-        //System.out.println("    ___|___|___|___|___|___|___|___|___|___|");  
+        System.out.println("___|___|___|___|___|___|___|___|___|___|____");  
         System.out.println("");
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
      /**
