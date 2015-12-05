@@ -1,36 +1,48 @@
-package ad310_Group;
+ 
 
 /**
- * Creates Aircraft Carries objects
+ * Creates Destroyer objects
  * 
  * @Author(s) Anne, Michael, Brandon, Joe
  * @Date November 28th 2015
  */
-public class AirCraftCarrier extends Boat {
-    
-	
-    public final int size = 5;
 
+public class Destroyer extends Boat {
+//     public String name = "Destroyer";
+// 	public int size = 2;
+//     public boolean[] boatState;
+//     public int[] position;
+//     public boolean isSunk = false;
+//     Direction direct;
+//     public char[] shipCoordinates;
+
+    
     /**
-     * Constructor for Battleship ships
+     * Default constructor for Destroyer objects
+     */
+    public Destroyer() {
+        super();
+        this.name = "Destroyer";
+        this.size = 2;
+        this.boatState = new boolean[]{false, false};
+        this.position = new int[]{0,0};
+        this.isSunk = false;
+        this.boatChar = 'D';
+    }
+    
+    /**
+     * Constructor for Destroyer ships
      * @param direction 
      * @param start 
      */
     
-    public AirCraftCarrier(int head, Direction direction) {
+    public Destroyer(int head, Direction direction) {
         this.position = new int[size];
         this.boatState = new boolean[size];
         this.isSunk = false;
         this.direct = direction;
-        //this.currentSpot = head;
-        this.shipCoordinates = new char[size];
         
-        
-    }
-    
-    protected void shipsCoordinates(){
-    	
-    }
+    }	
     
     protected void placeBoat(int head){
 		this.position[0] 	= head;
@@ -53,6 +65,6 @@ public class AirCraftCarrier extends Boat {
 			}			
 		}
 	}
-	
-	
+    
 }
+

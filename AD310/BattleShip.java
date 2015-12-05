@@ -1,23 +1,39 @@
-package ad310_Group;
-
-/**
- * Creates Aircraft Carries objects
+ /**
+ * Creates Battleship objects
  * 
  * @Author(s) Anne, Michael, Brandon, Joe
  * @Date November 28th 2015
  */
 
-public class Cruiser extends Boat {
-    
-	public final int size = 3;
+public class BattleShip extends Boat {
+//     public String name = "BattleShip";
+// 	public int size = 4;
+//     public boolean[] boatState;
+//     public int[] position;
+//     public boolean isSunk = false;
+//     Direction direct;
+//     public char[] shipCoordinates;
 
+    /**
+     * Default constructor for Battleship objects
+     */
+    public BattleShip() {
+        super();
+        this.name = "Battleship";
+        this.size = 4;
+        this.boatState = new boolean[]{false, false, false, false};
+        this.position = new int[]{0,0,0,0};
+        this.isSunk = false;
+        this.boatChar = 'B';
+    }
+    
     /**
      * Constructor for Battleship ships
      * @param direction 
      * @param start 
      */
     
-    public Cruiser(int head, Direction direction) {
+    public BattleShip(int head, Direction direction) {
         this.position = new int[size];
         this.boatState = new boolean[size];
         this.isSunk = false;

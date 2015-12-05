@@ -1,4 +1,4 @@
-package ad310_Group;
+ 
 
 /**
  * Creates Aircraft Carries objects
@@ -7,17 +7,34 @@ package ad310_Group;
  * @Date November 28th 2015
  */
 
-public class Destroyer extends Boat {
-    
-	public final int size = 2;
-
+public class Cruiser extends Boat {
+//     public String name = "Cruiser";
+// 	public int size = 3;
+//     public boolean[] boatState;
+//     public int[] position;
+//     public boolean isSunk = false;
+//     Direction direct;
+//     public char[] shipCoordinates;	
+	
     /**
-     * Constructor for Battleship ships
+     * Default constructor for Cruiser objects
+     */
+    public Cruiser() {
+        super();
+        this.name = "Cruiser";
+        this.size = 3;
+        this.boatState = new boolean[]{false, false, false};
+        this.position = new int[]{0,0,0};
+        this.isSunk = false;
+        this.boatChar = 'C';
+    }
+    
+    /**
+     * Constructor for Cruiser ships
      * @param direction 
      * @param start 
      */
-    
-    public Destroyer(int head, Direction direction) {
+    public Cruiser(int head, Direction direction) {
         this.position = new int[size];
         this.boatState = new boolean[size];
         this.isSunk = false;
@@ -48,4 +65,3 @@ public class Destroyer extends Boat {
 	}
     
 }
-
